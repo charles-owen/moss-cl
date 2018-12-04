@@ -4,7 +4,7 @@
  * Plugin class for the MOSS Submission Analysis Subsystem
  */
 
-namespace CL\Moss;
+namespace CL\MOSS;
 
 use CL\Site\Site;
 use CL\Site\System\Server;
@@ -32,7 +32,6 @@ class MossPlugin extends \CL\Site\Plugin {
 	 * @param Site $site The Site configuration object
 	 */
 	public function install(Site $site) {
-		$this->site = $site;
 	}
 
 

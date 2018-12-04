@@ -12,6 +12,7 @@ use CL\Site\System\Server;
 use CL\Course\Members;
 use CL\Course\Member;
 use CL\Users\User;
+use CL\Course\Analysis\Analyzer;
 
 /**
  * View class for MOSS analysis
