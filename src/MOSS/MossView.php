@@ -23,7 +23,7 @@ class MossView extends \CL\Course\View {
 	 * @param Site $site Site object
 	 */
 	public function __construct(Site $site, Server $server, array $properties) {
-		parent::__construct($site);
+		parent::__construct($site, ['atLeast'=>Member::STAFF]);
 
 		$this->setTitle('MOSS Analysis');
 
@@ -55,6 +55,11 @@ class MossView extends \CL\Course\View {
 
 		if($this->moss === null) {
 			$server->redirect($site->root . '/cl/invalid');
+			return;
+		}
+
+		if(!$this->user->atLeast($this->moss->atLeast)) {
+			$server->redirect($site->root . '/cl/notauthorized');
 			return;
 		}
 
