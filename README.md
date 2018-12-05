@@ -1,7 +1,7 @@
-# CourseLib MOSS Submission analysis component
+# CourseLib MOSS Submission analysis component 
 
 This component supports sending submissions to the CourseLib system to 
-the MOSS (Measure of Software Similarity) system for detections of
+the MOSS (Measure of Software Similarity) system for detection of
 inappropriate copying.
 
 See http://metlab.cse.msu.edu/courselib/moss for more detail on utilizing the 
