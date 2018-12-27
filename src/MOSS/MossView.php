@@ -23,7 +23,7 @@ class MossView extends \CL\Course\View {
 	 * @param Site $site Site object
 	 */
 	public function __construct(Site $site, Server $server, array $properties) {
-		parent::__construct($site, ['atLeast'=>Member::STAFF]);
+		parent::__construct($site, ['at-least'=>Member::STAFF]);
 
 		$this->setTitle('MOSS Analysis');
 
