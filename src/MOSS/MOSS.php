@@ -1,5 +1,7 @@
 <?php
 
+/// @cond
+
 namespace CL\MOSS;
 
 /*
@@ -303,3 +305,5 @@ class MOSS {
 		fwrite($handle, file_get_contents($file));
 	}
 }
+
+/// @endcond
