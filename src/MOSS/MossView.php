@@ -19,8 +19,10 @@ use CL\Course\Analysis\Analyzer;
  */
 class MossView extends \CL\Course\View {
 	/**
-	 * SectionSelectorView constructor.
-	 * @param Site $site Site object
+	 * MossView constructor.
+	 * @param Site $site The site object
+	 * @param Server $server Abstraction of the server
+	 * @param array $properties Properties passed to the router
 	 */
 	public function __construct(Site $site, Server $server, array $properties) {
 		parent::__construct($site, ['at-least'=>Member::STAFF]);
