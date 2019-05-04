@@ -166,7 +166,7 @@ HTML;
 			$output('<p>' . $user->displayName);
 
 			// Get the submission data for this user
-			$data = $this->moss->get_data($this->site, $user->member);
+			$data = $this->submission->get_data($this->site, $user, $this->moss->include, $this->moss->exclude);
 
 			if(count($data) == 0) {
 				$output(" <em>no submission</em></p>");
