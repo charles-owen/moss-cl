@@ -210,6 +210,8 @@ class MOSS {
 		if(!$socket){
 			throw new \Exception("Socket-Error: " . $errstr . " (" . $errno . ")", 8);
 		} else {
+		    stream_set_timeout($socket, 600, 0);
+
 //			echo "moss ". $this->userid."\n";
 //			echo "directory " . $this->options['d']."\n";
 //			echo "X " . $this->options['x']."\n";
@@ -276,7 +278,12 @@ class MOSS {
 			if(!$abort) {
 				fwrite($socket, "query 0 " . $this->options['c'] . "\n");
 				$read = fgets($socket);
-				if (substr($read, 0, 5) === "http:") {
+				$metaData = stream_get_meta_data($socket);
+				if($metaData['timed_out'] || strlen($read) === 0) {
+                    $output(print_r($metaData, true));
+                }
+
+                if (substr($read, 0, 5) === "http:") {
 					$output("<a href=\"$read\" target=\"moss\">$read</a>");
 				} else {
 					$output("Response: $read");
