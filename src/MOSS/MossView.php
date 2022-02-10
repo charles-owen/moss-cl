@@ -214,24 +214,25 @@ HTML;
 		$analyzer->set_path($path);
 		$unzipped = $analyzer->get_unzipped_dir($this->site);
 		unlink($path);
+        if($unzipped !== null) {
+            $include = $this->moss->include;
+            $exclude = $this->moss->exclude;
+            $strip = "#^.*/unzip/#";
 
-		$include = $this->moss->include;
-		$exclude = $this->moss->exclude;
-		$strip = "#^.*/unzip/#";
+            $files = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($unzipped));
+            foreach($files as $file => $obj){
+                if(preg_match($include, $file) == 1) {
+                    // This is an included file
+                    if($exclude !== null && preg_match($exclude, $file) == 1) {
+                        //echo "Exclude:" . $file . "<br>";
+                        continue;
+                    }
 
-		$files = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($unzipped));
-		foreach($files as $file => $obj){
-			if(preg_match($include, $file) == 1) {
-				// This is an included file
-				if($exclude !== null && preg_match($exclude, $file) == 1) {
-					//echo "Exclude:" . $file . "<br>";
-					continue;
-				}
-
-				$filename = '/' . $user->userId. '/' . preg_replace($strip, '', $file);
-				$moss->add_raw($filename, file_get_contents($file), $this->moss->language);
-			}
-		}
+                    $filename = '/' . $user->userId. '/' . preg_replace($strip, '', $file);
+                    $moss->add_raw($filename, file_get_contents($file), $this->moss->language);
+                }
+            }
+        }
 
 		$analyzer->close();
 	}
